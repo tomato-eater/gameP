@@ -16,7 +16,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         //ƒL[“ü—Íˆ—
         return 0;
     }
-    return 0;
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
 int WINAPI WinMain
