@@ -1,4 +1,5 @@
 #include<Windows.h>
+#include "DirectX12.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -50,6 +51,9 @@ int WINAPI WinMain
         NULL
     );
     ShowWindow(hwnd, nCmdShow);
+
+    DirectX12 DX12;
+    IDXGIFactory4* factory = DX12.CreateDXGIFactory();
 
     // 3. メッセージループ
     MSG msg{};
