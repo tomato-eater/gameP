@@ -54,6 +54,11 @@ int WINAPI WinMain
 
     DirectX12 DX12;
     IDXGIFactory4* factory = DX12.CreateDXGIFactory();
+    IDXGIAdapter1* adapter = DX12.GetHardwareAdapter(factory);
+    ID3D12Device* device = DX12.CreateD3D12Device(adapter);
+    ID3D12CommandQueue* commandQueue = DX12.CreateCommandQueue(device);
+    DX12.CreateSwapChain(factory, commandQueue, hwnd);
+    DX12.EnableDebugLayer();
 
     // 3. メッセージループ
     MSG msg{};

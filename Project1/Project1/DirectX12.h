@@ -5,8 +5,8 @@
 class DirectX12
 {
 public:
-	DirectX12() = default;
-	~DirectX12() = default;
+	DirectX12() {}
+	~DirectX12() {}
 
 
 	IDXGIFactory4* CreateDXGIFactory();
