@@ -145,13 +145,16 @@ IDXGISwapChain3* DirectX12::CreateSwapChain(IDXGIFactory4* factoty, ID3D12Comman
 void DirectX12::EnableDebugLayer()
 {
 #if defined(_DEBUG)
+    // デバッグインターフェースを取得
     ID3D12Debug* debugController;
     if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
     {
+        // デバッグレイヤーを有効化
         debugController->EnableDebugLayer();
 
+        // より詳細な検証を有効化（任意）
         ID3D12Debug1* debugController1;
-        if (SUCCEEDED(debugController1->QueryInterface(IID_PPV_ARGS(&debugController1))))
+        if (SUCCEEDED(debugController->QueryInterface(IID_PPV_ARGS(&debugController1)))) 
         {
             debugController1->SetEnableGPUBasedValidation(TRUE);
         }
