@@ -29,9 +29,7 @@ IDXGIAdapter1* DirectX12::GetHardwareAdapter(IDXGIFactory4* factory)
     for (UINT adapterIndex = 0;; ++adapterIndex) {
         adapter = nullptr;
         if (DXGI_ERROR_NOT_FOUND == factory->EnumAdapters1(adapterIndex, &adapter)) // アダプターが見つからない場合は終了
-        {
             break; 
-        }
 
         // アダプター情報を取得
         DXGI_ADAPTER_DESC1 desc;
@@ -120,9 +118,7 @@ IDXGISwapChain3* DirectX12::CreateSwapChain(IDXGIFactory4* factoty, ID3D12Comman
     swapChainDesc.SampleDesc.Count = 1;
 
     IDXGISwapChain1* swapChain1;
-    HRESULT hr = factoty->CreateSwapChainForHwnd(
-        commandQueue, hwnd, &swapChainDesc, nullptr, nullptr, &swapChain1);
-
+    HRESULT hr = factoty->CreateSwapChainForHwnd(commandQueue, hwnd, &swapChainDesc, nullptr, nullptr, &swapChain1);
     if (FAILED(hr))
     {
         OutputDebugString("Failed to create Swap Chain\n");

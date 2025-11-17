@@ -1,5 +1,6 @@
 #include<Windows.h>
 #include "DirectX12.h"
+#include "DirectClear.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -57,13 +58,26 @@ int WINAPI WinMain
     IDXGIAdapter1* adapter = DX12.GetHardwareAdapter(factory);
     ID3D12Device* device = DX12.CreateD3D12Device(adapter);
     ID3D12CommandQueue* commandQueue = DX12.CreateCommandQueue(device);
-    DX12.CreateSwapChain(factory, commandQueue, hwnd);
-    DX12.EnableDebugLayer();
+    IDXGISwapChain3* swapChain = DX12.CreateSwapChain(factory, commandQueue, hwnd);
+	//DX12.EnableDebugLayer();　//こいつのせいで rtvHeapが作れない?
+
+	DirectClear crear;
+    ID3D12DescriptorHeap* rtvHeap = crear.DiscripterHeapDesc(device);
+    UINT rtvDescriptorSize = crear.DiscripterHeapAccess(device, rtvHeap);
+    ID3D12Resource* renderTargets = crear.RenderTarget(swapChain, rtvHeap, rtvDescriptorSize, device);
+    ID3D12CommandAllocator* commandAllocators = crear.CommandAllocatorCreat(device);
+    ID3D12GraphicsCommandList* commandList = crear.CommandList(device, commandAllocators);
+	crear.CommandQueue(commandQueue, commandList);
+    ID3D12Fence* fence = crear.FenceCreat(device);
 
     // 3. メッセージループ
     MSG msg{};
     while (GetMessage(&msg, NULL, 0, 0))
     {
+        const UINT64 fenceValue = swapChain->GetCurrentBackBufferIndex();
+		crear.FenceCheck(fenceValue, commandQueue, fence);
+        crear.CommandAllocatorReset(swapChain, &commandAllocators, commandList, &renderTargets, rtvHeap, rtvDescriptorSize);
+
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
