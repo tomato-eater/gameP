@@ -1,6 +1,8 @@
 #include<Windows.h>
 #include "DirectX12.h"
 #include "DirectClear.h"
+#include "RenderTarget.h"
+#include "CommandAllocator.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -64,22 +66,30 @@ int WINAPI WinMain
 	DirectClear crear;
     ID3D12DescriptorHeap* rtvHeap = crear.DiscripterHeapDesc(device);
     UINT rtvDescriptorSize = crear.DiscripterHeapAccess(device, rtvHeap);
-    ID3D12Resource* renderTargets = crear.RenderTarget(swapChain, rtvHeap, rtvDescriptorSize, device);
-    ID3D12CommandAllocator* commandAllocators = crear.CommandAllocatorCreat(device);
-    ID3D12GraphicsCommandList* commandList = crear.CommandList(device, commandAllocators);
-	crear.CommandQueue(commandQueue, commandList);
+    RenderTarget renderTarget[2];
+    CommandAllocator commandAllocator[2];
+    for (UINT i = 0; i < 2; i++)
+    {
+        renderTarget[i].RenderTargetCreate(swapChain, i, rtvHeap, rtvDescriptorSize, device);
+        commandAllocator[i].CommandAllocatorCreat(device);
+	}
+    ID3D12GraphicsCommandList* commandList = crear.CommandList(device, commandAllocator[0].GetCommandAllocator());
     ID3D12Fence* fence = crear.FenceCreat(device);
 
     // 3. メッセージループ
     MSG msg{};
     while (GetMessage(&msg, NULL, 0, 0))
     {
-        const UINT64 fenceValue = swapChain->GetCurrentBackBufferIndex();
-		crear.FenceCheck(fenceValue, commandQueue, fence);
-        crear.CommandAllocatorReset(swapChain, &commandAllocators, commandList, &renderTargets, rtvHeap, rtvDescriptorSize);
+        const UINT64 currentBackBuffer = swapChain->GetCurrentBackBufferIndex();
+		crear.FenceWait(currentBackBuffer, commandQueue, fence, swapChain);
+           
+		D3D12_RESOURCE_BARRIER barrier = commandAllocator[currentBackBuffer].CommandAllocatorReset(commandList, renderTarget[currentBackBuffer].GetRenderTarget(), rtvHeap, currentBackBuffer, rtvDescriptorSize);
+        crear.CommandQueue(commandQueue, commandList);
+
 
         TranslateMessage(&msg);
         DispatchMessage(&msg);
+		crear.FencePresent(currentBackBuffer, commandQueue, fence, swapChain);
     }
 
     return 0;

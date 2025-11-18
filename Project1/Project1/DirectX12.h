@@ -2,12 +2,12 @@
 
 #include<dxgi1_4.h>
 #include<d3d12.h>
+
 class DirectX12
 {
 public:
 	DirectX12() {}
 	~DirectX12() {}
-
 
 	IDXGIFactory4* CreateDXGIFactory();
 	IDXGIAdapter1* GetHardwareAdapter(IDXGIFactory4* factory);
