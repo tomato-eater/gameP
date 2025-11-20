@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CommandAllocator.cpp" />
+    <ClCompile Include="DeltaBuffer.cpp" />
     <ClCompile Include="DirectClear.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -145,12 +146,20 @@
     </ClCompile>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="RootSignature.cpp" />
+    <ClCompile Include="Shader.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandAllocator.h" />
+    <ClInclude Include="DeltaBuffer.h" />
     <ClInclude Include="DirectClear.h" />
     <ClInclude Include="DirectX12.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="RootSignature.h" />
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

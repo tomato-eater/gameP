@@ -25,9 +25,18 @@ D3D12_RESOURCE_BARRIER CommandAllocator::CommandAllocatorReset(ID3D12GraphicsCom
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
 	rtvHandle.ptr += currentBackBuffer * rtvDescriptorSize;
 
-	// 画面クリア（青色）
-	float clearColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
-	commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	if (!currentBackBuffer)
+	{
+			// 画面クリア（青色）
+		float clearColor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+		commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	}
+	else
+	{
+		// 画面クリア（赤色）
+		float clearColor[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+		commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	}
 
 	// レンダーターゲットを「絵を出す状態」に変更する（リソースバリア）
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;

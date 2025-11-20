@@ -3,6 +3,8 @@
 #include "DirectClear.h"
 #include "RenderTarget.h"
 #include "CommandAllocator.h"
+#include "DeltaBuffer.h"
+#include "RootSignature.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -76,9 +78,15 @@ int WINAPI WinMain
     ID3D12GraphicsCommandList* commandList = crear.CommandList(device, commandAllocator[0].GetCommandAllocator());
     ID3D12Fence* fence = crear.FenceCreat(device);
 
+    DeltaBuffer deltaBuffer;
+    D3D12_VERTEX_BUFFER_VIEW vertextBuffer = deltaBuffer.VertexBufferCreate(device);
+    D3D12_INDEX_BUFFER_VIEW indexBuffer = deltaBuffer.IndexBufferCreate(device);
+    RootSignature signature;
+    ID3D12RootSignature* rootSignature = signature.RootSignatureCreate(device);
+
     // 3. メッセージループ
     MSG msg{};
-    while (GetMessage(&msg, NULL, 0, 0))
+    while (GetMessage(&msg, NULL, 0, 0)) 
     {
         const UINT64 currentBackBuffer = swapChain->GetCurrentBackBufferIndex();
 		crear.FenceWait(currentBackBuffer, commandQueue, fence, swapChain);
