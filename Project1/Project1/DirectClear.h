@@ -11,7 +11,7 @@ private:
 	UINT64 nextValue = 0;
 
 public:
-	DirectClear() {}
+	DirectClear() = default;
 	~DirectClear() {}
 
 	ID3D12DescriptorHeap* DiscripterHeapDesc(ID3D12Device* device);

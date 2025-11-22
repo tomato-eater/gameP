@@ -22,7 +22,7 @@ D3D12_RESOURCE_BARRIER CommandAllocator::CommandAllocatorReset(ID3D12GraphicsCom
 	commandList->ResourceBarrier(1, &barrier);
 
 	// レンダーターゲットの取得
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
+	rtvHandle = rtvHeap->GetCPUDescriptorHandleForHeapStart();
 	rtvHandle.ptr += currentBackBuffer * rtvDescriptorSize;
 
 	if (!currentBackBuffer)

@@ -1,12 +1,13 @@
 #include "Shader.h"
 
+#pragma comment(lib, "d3dcompiler.lib")
 ID3DBlob* Shader::VertexShaderCreate()
 {
 	ID3D10Blob* vertexShader{};
 
 	HRESULT hr = D3DCompileFromFile
 	(
-		L"Shader.hlsl",
+		L"Project1/VertexShader.hlsl",
 		nullptr,
 		nullptr,
 		"vs",
@@ -17,7 +18,8 @@ ID3DBlob* Shader::VertexShaderCreate()
 		&error
 	);
 
-	error->Release();
+	if (error != NULL)
+		error->Release();
 	return vertexShader;
 }
 
@@ -27,7 +29,7 @@ ID3DBlob* Shader::PixelShaderCreate()
 
 	HRESULT hr = D3DCompileFromFile
 	(
-		L"Shader.hlsl",
+		L"Project1/Shader.hlsl",
 		nullptr,
 		nullptr,
 		"ps",
@@ -38,6 +40,7 @@ ID3DBlob* Shader::PixelShaderCreate()
 		&error
 	);
 
-	error->Release();
+	if (error != NULL)
+		error->Release();
 	return pixelShader;
 }

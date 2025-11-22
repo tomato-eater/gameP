@@ -6,14 +6,16 @@ class CommandAllocator
 {
 private:
 	ID3D12CommandAllocator* commandAllocator;
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
 
 public:
-	CommandAllocator() {}
+	CommandAllocator() = default;
 	~CommandAllocator() {}
 
 	void CommandAllocatorCreat(ID3D12Device* device);
 	ID3D12CommandAllocator* GetCommandAllocator() { return commandAllocator; }
 	D3D12_RESOURCE_BARRIER CommandAllocatorReset(ID3D12GraphicsCommandList* commandList,
 							ID3D12Resource* renderTarget, ID3D12DescriptorHeap* rtvHeap, UINT64 currentBackBuffer, UINT rtvDescriptorSize);
+	D3D12_CPU_DESCRIPTOR_HANDLE* GetHandle() { return &rtvHandle; }
 };
 

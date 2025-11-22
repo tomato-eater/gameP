@@ -5,6 +5,9 @@
 #include "CommandAllocator.h"
 #include "DeltaBuffer.h"
 #include "RootSignature.h"
+#include "Shader.h"
+#include "PipLineStateObj.h"
+#include "ViewPorts.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -81,9 +84,18 @@ int WINAPI WinMain
     DeltaBuffer deltaBuffer;
     D3D12_VERTEX_BUFFER_VIEW vertextBuffer = deltaBuffer.VertexBufferCreate(device);
     D3D12_INDEX_BUFFER_VIEW indexBuffer = deltaBuffer.IndexBufferCreate(device);
+    
     RootSignature signature;
     ID3D12RootSignature* rootSignature = signature.RootSignatureCreate(device);
 
+    Shader shader;
+    ID3DBlob* vertexShader = shader.VertexShaderCreate();
+    ID3DBlob* pixelShader = shader.PixelShaderCreate();
+
+    PipLineStateObj pipLineState;
+    ID3D12PipelineState* piplineObj = pipLineState.PipLineObjCreate(rootSignature, vertexShader, pixelShader, device);
+
+    ViewPorts View;
     // 3. メッセージループ
     MSG msg{};
     while (GetMessage(&msg, NULL, 0, 0)) 
@@ -94,6 +106,7 @@ int WINAPI WinMain
 		D3D12_RESOURCE_BARRIER barrier = commandAllocator[currentBackBuffer].CommandAllocatorReset(commandList, renderTarget[currentBackBuffer].GetRenderTarget(), rtvHeap, currentBackBuffer, rtvDescriptorSize);
         crear.CommandQueue(commandQueue, commandList);
 
+        View.ViewPort(800, 600, commandList);
 
         TranslateMessage(&msg);
         DispatchMessage(&msg);
