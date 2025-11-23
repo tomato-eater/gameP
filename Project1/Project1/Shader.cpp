@@ -7,7 +7,7 @@ ID3DBlob* Shader::VertexShaderCreate()
 
 	HRESULT hr = D3DCompileFromFile
 	(
-		L"Project1/VertexShader.hlsl",
+		L"VertexShader.hlsl",
 		nullptr,
 		nullptr,
 		"vs",
@@ -29,7 +29,7 @@ ID3DBlob* Shader::PixelShaderCreate()
 
 	HRESULT hr = D3DCompileFromFile
 	(
-		L"Project1/Shader.hlsl",
+		L"PixelShader.hlsl",
 		nullptr,
 		nullptr,
 		"ps",

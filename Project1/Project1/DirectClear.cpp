@@ -78,4 +78,6 @@ void DirectClear::FencePresent(UINT64 currentBackBuffer, ID3D12CommandQueue* com
 	commandQueue->Signal(fence, fenceValue[currentBackBuffer]);
 
 	swapChain->Present(1, 0);
+
+
 }

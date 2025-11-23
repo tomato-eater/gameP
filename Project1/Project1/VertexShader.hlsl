@@ -1,4 +1,4 @@
-struct VSInput
+ struct VSInput
 {
     float3 position : POSITION; // 入力：頂点座標
     float4 color : COLOR; // 入力：頂点色

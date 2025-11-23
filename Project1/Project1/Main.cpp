@@ -1,4 +1,4 @@
-#include<Windows.h>
+#include <Windows.h>
 #include "DirectX12.h"
 #include "DirectClear.h"
 #include "RenderTarget.h"
@@ -7,7 +7,6 @@
 #include "RootSignature.h"
 #include "Shader.h"
 #include "PipLineStateObj.h"
-#include "ViewPorts.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -95,7 +94,6 @@ int WINAPI WinMain
     PipLineStateObj pipLineState;
     ID3D12PipelineState* piplineObj = pipLineState.PipLineObjCreate(rootSignature, vertexShader, pixelShader, device);
 
-    ViewPorts View;
     // 3. メッセージループ
     MSG msg{};
     while (GetMessage(&msg, NULL, 0, 0)) 
@@ -103,14 +101,16 @@ int WINAPI WinMain
         const UINT64 currentBackBuffer = swapChain->GetCurrentBackBufferIndex();
 		crear.FenceWait(currentBackBuffer, commandQueue, fence, swapChain);
            
-		D3D12_RESOURCE_BARRIER barrier = commandAllocator[currentBackBuffer].CommandAllocatorReset(commandList, renderTarget[currentBackBuffer].GetRenderTarget(), rtvHeap, currentBackBuffer, rtvDescriptorSize);
+		commandAllocator[currentBackBuffer].CommandAllocatorReset(commandList, renderTarget[currentBackBuffer].GetRenderTarget(), rtvHeap, device, currentBackBuffer, rtvDescriptorSize, piplineObj, rootSignature, &vertextBuffer,&indexBuffer);
         crear.CommandQueue(commandQueue, commandList);
 
-        View.ViewPort(800, 600, commandList);
+		ID3D12CommandList* ppCommandLists[] = { commandList };
+        commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
+
+        crear.FencePresent(currentBackBuffer, commandQueue, fence, swapChain);
 
         TranslateMessage(&msg);
         DispatchMessage(&msg);
-		crear.FencePresent(currentBackBuffer, commandQueue, fence, swapChain);
     }
 
     return 0;
