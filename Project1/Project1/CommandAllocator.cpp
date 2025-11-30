@@ -40,8 +40,8 @@ void CommandAllocator::CommandAllocatorReset(ID3D12GraphicsCommandList* commandL
 	D3D12_VIEWPORT viewPort = {};
 	viewPort.TopLeftX = 0.0f;
 	viewPort.TopLeftY = 0.0f;
-	viewPort.Width = 1280; //•`‰æƒTƒCƒY‰¡
-	viewPort.Height = 720; //•`‰æƒTƒCƒYc
+	viewPort.Width = 800; //•`‰æƒTƒCƒY‰¡
+	viewPort.Height = 600; //•`‰æƒTƒCƒYc
 	viewPort.MinDepth = 0.0f;
 	viewPort.MaxDepth = 1.0f;
 
@@ -51,8 +51,8 @@ void CommandAllocator::CommandAllocatorReset(ID3D12GraphicsCommandList* commandL
 	D3D12_RECT scissorRect = {};
 	scissorRect.left = 0;
 	scissorRect.top = 0;
-	scissorRect.right = 1280;
-	scissorRect.bottom = 720;
+	scissorRect.right = 800;
+	scissorRect.bottom = 600;
 	commandList->RSSetScissorRects(1, &scissorRect);
 
 	commandList->IASetVertexBuffers(0, 1, vertextBuffer);

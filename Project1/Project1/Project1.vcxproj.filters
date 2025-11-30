@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Orange">
+      <UniqueIdentifier>{7e21a941-23e9-4651-b279-8b08c77c3938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Orange\C">
+      <UniqueIdentifier>{a0385a16-02ab-4b3f-8b41-8467252e3f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Orange\H">
+      <UniqueIdentifier>{c42297fb-a9af-4755-8f53-a76355c3c1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Orange\S">
+      <UniqueIdentifier>{ce3562cb-1171-4ea6-bae5-113d45cc34ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -42,6 +54,36 @@
     <ClCompile Include="PipLineStateObj.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="O_main.cpp">
+      <Filter>Orange</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Window.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_DirectX12.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_DirectXCrear.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Fence.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Buffer.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Signature.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Shader.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_PipLine.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Drawing.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectX12.h">
@@ -67,6 +109,33 @@
     </ClInclude>
     <ClInclude Include="PipLineStateObj.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Window.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_DirectX12.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_DirectXCrear.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Fence.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Buffer.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Signature.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Shader.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_PipLine.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Drawing.h">
+      <Filter>Orange\H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

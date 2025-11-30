@@ -152,7 +152,26 @@
     <ClCompile Include="DirectX12.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="O_Buffer.cpp" />
+    <ClCompile Include="O_DirectX12.cpp" />
+    <ClCompile Include="O_DirectXCrear.cpp" />
+    <ClCompile Include="O_Drawing.cpp" />
+    <ClCompile Include="O_Fence.cpp" />
+    <ClCompile Include="O_main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="O_PipLine.cpp" />
+    <ClCompile Include="O_Shader.cpp" />
+    <ClCompile Include="O_Signature.cpp" />
+    <ClCompile Include="O_Window.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="PipLineStateObj.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="RootSignature.cpp" />
@@ -168,6 +187,15 @@
     <ClInclude Include="DeltaBuffer.h" />
     <ClInclude Include="DirectClear.h" />
     <ClInclude Include="DirectX12.h" />
+    <ClInclude Include="O_Buffer.h" />
+    <ClInclude Include="O_DirectX12.h" />
+    <ClInclude Include="O_DirectXCrear.h" />
+    <ClInclude Include="O_Drawing.h" />
+    <ClInclude Include="O_Fence.h" />
+    <ClInclude Include="O_PipLine.h" />
+    <ClInclude Include="O_Shader.h" />
+    <ClInclude Include="O_Signature.h" />
+    <ClInclude Include="O_Window.h" />
     <ClInclude Include="PipLineStateObj.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="RootSignature.h" />
