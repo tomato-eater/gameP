@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <Windows.h>
 #include <string>
 using namespace std;
@@ -16,7 +17,7 @@ public:
 	O_Window() = default;
 	~O_Window() = default;
 
-	[[nodiscard]] HRESULT Create(HINSTANCE hInstance, int width, int height, string name);
+	[[nodiscard]] bool Create(HINSTANCE hInstance, int width, int height, string name);
 
 	HWND GetHwnd() const { return hwnd; }
 };

@@ -10,9 +10,9 @@ O_Fence::~O_Fence()
 }
 
 //フェンスの生成
-bool O_Fence::Create(ID3D12Device* device)
+bool O_Fence::Create(O_DirectX12& direct)
 {
-	HRESULT hr = device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
+	HRESULT hr = direct.GetDevice()->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 	if (FAILED(hr))
 	{
 			assert(false && "フェンスの生成に失敗");
@@ -36,9 +36,10 @@ void O_Fence::Wait(UINT index)
 	}
 }
 
-void O_Fence::Present(UINT index, O_DirectX12& directX)
+void O_Fence::Present(UINT index, O_DirectX12& direct)
 {
-	fenceValue[index] = ++nextValue;
-	directX.GetCommandQ()->Signal(fence, fenceValue[index]);
-	directX.GetSwapChain()->Present(1, 0); //出力
+	direct.GetSwapChain()->Present(1, 0); //出力
+	direct.GetCommandQ()->Signal(fence, nextValue);
+	fenceValue[index] = nextValue;
+	nextValue++;
 }

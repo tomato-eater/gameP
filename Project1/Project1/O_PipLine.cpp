@@ -9,20 +9,13 @@ O_PipLine::~O_PipLine()
 	}
 }
 
-bool O_PipLine::Create(O_DirectX12& directX, O_Signature& signature, O_Shader& shader)
-{
-	if (CreatePipLine(directX.GetDevice(), signature.GetRoot(), shader.GetVS(), shader.GetPS())) return true;
-
-	return false;
-}
-
-bool O_PipLine::CreatePipLine(ID3D12Device* device, ID3D12RootSignature* signature, ID3D10Blob* vs, ID3D10Blob* ps)
+bool O_PipLine::Create(O_Signature& root, O_Shader& shader, O_DirectX12& direct)
 {
 	D3D12_INPUT_ELEMENT_DESC IEdesc[] =
 	{
 		{
 			"POSITION", 0,
-			DXGI_FORMAT_R32G32B32A32_FLOAT,
+			DXGI_FORMAT_R32G32B32_FLOAT,
 			0, 0,
 			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			0
@@ -42,7 +35,7 @@ bool O_PipLine::CreatePipLine(ID3D12Device* device, ID3D12RootSignature* signatu
 	rasDesc.FrontCounterClockwise = false;
 	rasDesc.DepthBias = D3D12_DEFAULT_DEPTH_BIAS;
 	rasDesc.DepthBiasClamp = D3D12_DEFAULT_DEPTH_BIAS_CLAMP;
-	rasDesc.SlopeScaledDepthBias = D3D12_DEFAULT_DEPTH_BIAS_CLAMP;
+	rasDesc.SlopeScaledDepthBias = D3D12_DEFAULT_SLOPE_SCALED_DEPTH_BIAS;
 	rasDesc.DepthClipEnable = true;
 	rasDesc.MultisampleEnable = false;
 	rasDesc.AntialiasedLineEnable = false;
@@ -65,9 +58,9 @@ bool O_PipLine::CreatePipLine(ID3D12Device* device, ID3D12RootSignature* signatu
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC GPSdesc = {};
 	GPSdesc.InputLayout = { IEdesc,_countof(IEdesc) };
-	GPSdesc.pRootSignature = signature;
-	GPSdesc.VS = { vs->GetBufferPointer(),vs->GetBufferSize() };
-	GPSdesc.PS = { ps->GetBufferPointer(),ps->GetBufferSize() };
+	GPSdesc.pRootSignature = root.GetRoot();
+	GPSdesc.VS = { shader.GetVS()->GetBufferPointer(),shader.GetVS()->GetBufferSize()};
+	GPSdesc.PS = { shader.GetPS()->GetBufferPointer(),shader.GetPS()->GetBufferSize()};
 	GPSdesc.RasterizerState = rasDesc;
 	GPSdesc.BlendState = Bdesc;
 	GPSdesc.DepthStencilState.DepthEnable = FALSE;
@@ -78,7 +71,7 @@ bool O_PipLine::CreatePipLine(ID3D12Device* device, ID3D12RootSignature* signatu
 	GPSdesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	GPSdesc.SampleDesc.Count = 1;
 
-	HRESULT hr = device->CreateGraphicsPipelineState(&GPSdesc, IID_PPV_ARGS(&pipLine));
+	HRESULT hr = direct.GetDevice()->CreateGraphicsPipelineState(&GPSdesc, IID_PPV_ARGS(&pipLine));
 	if (FAILED(hr))
 	{
 		assert(false && "パイプラインステートオブジェの生成に失敗");

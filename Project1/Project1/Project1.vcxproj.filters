@@ -27,33 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectX12.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectClear.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandAllocator.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderTarget.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="DeltaBuffer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="RootSignature.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PipLineStateObj.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="O_main.cpp">
       <Filter>Orange</Filter>
     </ClCompile>
@@ -63,13 +36,7 @@
     <ClCompile Include="O_DirectX12.cpp">
       <Filter>Orange\C</Filter>
     </ClCompile>
-    <ClCompile Include="O_DirectXCrear.cpp">
-      <Filter>Orange\C</Filter>
-    </ClCompile>
     <ClCompile Include="O_Fence.cpp">
-      <Filter>Orange\C</Filter>
-    </ClCompile>
-    <ClCompile Include="O_Buffer.cpp">
       <Filter>Orange\C</Filter>
     </ClCompile>
     <ClCompile Include="O_Signature.cpp">
@@ -81,48 +48,42 @@
     <ClCompile Include="O_PipLine.cpp">
       <Filter>Orange\C</Filter>
     </ClCompile>
-    <ClCompile Include="O_Drawing.cpp">
+    <ClCompile Include="O_Heap.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_RenTarget.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Allocator.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_List.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_DeltaPolygon.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Camera.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_ConstantBuffer.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_Obj.cpp">
+      <Filter>Orange\C</Filter>
+    </ClCompile>
+    <ClCompile Include="O_ViewRect.cpp">
       <Filter>Orange\C</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DirectX12.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectClear.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandAllocator.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderTarget.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="DeltaBuffer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="RootSignature.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PipLineStateObj.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="O_Window.h">
       <Filter>Orange\H</Filter>
     </ClInclude>
     <ClInclude Include="O_DirectX12.h">
       <Filter>Orange\H</Filter>
     </ClInclude>
-    <ClInclude Include="O_DirectXCrear.h">
-      <Filter>Orange\H</Filter>
-    </ClInclude>
     <ClInclude Include="O_Fence.h">
-      <Filter>Orange\H</Filter>
-    </ClInclude>
-    <ClInclude Include="O_Buffer.h">
       <Filter>Orange\H</Filter>
     </ClInclude>
     <ClInclude Include="O_Signature.h">
@@ -134,16 +95,32 @@
     <ClInclude Include="O_PipLine.h">
       <Filter>Orange\H</Filter>
     </ClInclude>
-    <ClInclude Include="O_Drawing.h">
+    <ClInclude Include="O_Heap.h">
       <Filter>Orange\H</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="VertexShader.hlsl">
-      <Filter>リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="PixelShader.hlsl">
-      <Filter>リソース ファイル</Filter>
-    </FxCompile>
+    <ClInclude Include="O_RenTarget.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Allocator.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_List.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_DeltaPolygon.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Camera.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_ConstantBuffer.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_Obj.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
+    <ClInclude Include="O_ViewRect.h">
+      <Filter>Orange\H</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

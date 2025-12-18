@@ -15,21 +15,23 @@ private:
 	ID3D12Device* device;
 	ID3D12CommandQueue* commandQueue;
 	IDXGISwapChain3* swapChain;
-
-public:
-	O_DirectX12() = default;
-	~O_DirectX12();
-
-	[[nodiscard]] bool Create(int width, int height, O_Window& window);
+	DXGI_SWAP_CHAIN_DESC1 swapDesc;
 
 	bool CreateFactory();
 	bool CreateAdapter();
 	bool CreateDevice();
 	bool CreateCommandQueue();
-	bool CreateSwapChain(int width, int height, HWND window );
+	bool CreateSwapChain(int width, int height, HWND window);
+
+public:
+	O_DirectX12() = default;
+	~O_DirectX12();
+
+	[[nodiscard]] bool Create(int width, int height, O_Window& wind);
 
 	ID3D12Device* GetDevice() { return device; }
 	ID3D12CommandQueue* GetCommandQ() { return commandQueue; }
 	IDXGISwapChain3* GetSwapChain() { return swapChain; }
+	DXGI_SWAP_CHAIN_DESC1 GetSwapDesc() { return swapDesc; }
 };
 

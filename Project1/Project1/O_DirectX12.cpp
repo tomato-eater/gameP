@@ -1,5 +1,8 @@
 #include "O_DirectX12.h"
 
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+
 O_DirectX12::~O_DirectX12()
 {
 	if (factory)
@@ -29,7 +32,7 @@ O_DirectX12::~O_DirectX12()
 	}
 }
 
-bool O_DirectX12::Create(int width, int height, O_Window& window)
+bool O_DirectX12::Create(int width, int height, O_Window& wind)
 {
 	if (CreateFactory())
 	{
@@ -55,7 +58,7 @@ bool O_DirectX12::Create(int width, int height, O_Window& window)
 		return true;
 	}
 
-	if (CreateSwapChain(width, height, window.GetHwnd()))
+	if (CreateSwapChain(width, height, wind.GetHwnd()))
 	{
 		assert(false && "スワップチェインの生成に失敗");
 		return true;
@@ -155,17 +158,17 @@ bool O_DirectX12::CreateCommandQueue()
 // スワップチェインの生成
 bool O_DirectX12::CreateSwapChain(int width, int height, HWND hwnd)
 {
-	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
-	swapChainDesc.BufferCount = 2;
-	swapChainDesc.Width = width;
-	swapChainDesc.Height = height;
-	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	swapChainDesc.SampleDesc.Count = 1;
+	swapDesc = {};
+	swapDesc.BufferCount = 2;
+	swapDesc.Width = width;
+	swapDesc.Height = height;
+	swapDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	swapDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	swapDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
+	swapDesc.SampleDesc.Count = 1;
 
 	IDXGISwapChain1* swapChain1;
-	HRESULT hr = factory->CreateSwapChainForHwnd(commandQueue, hwnd, &swapChainDesc, nullptr, nullptr, &swapChain1);
+	HRESULT hr = factory->CreateSwapChainForHwnd(commandQueue, hwnd, &swapDesc, nullptr, nullptr, &swapChain1);
 	if (FAILED(hr))
 	{
 		factory->Release();

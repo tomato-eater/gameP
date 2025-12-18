@@ -20,7 +20,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 
 // ウィンドウ登録と作成
-HRESULT O_Window::Create(HINSTANCE hInstance, int width, int height, string name)
+bool O_Window::Create(HINSTANCE hInstance, int width, int height, string name)
 {
     //登録
 	WNDCLASS wc{};
@@ -42,7 +42,15 @@ HRESULT O_Window::Create(HINSTANCE hInstance, int width, int height, string name
         hInstance,
         NULL
     );
-    ShowWindow(hwnd, SW_SHOW);
 
-	return S_OK;
+    if (!hwnd)
+    {
+        assert(false && "ウィンドウの作成に失敗");
+        return true;
+    }
+
+    ShowWindow(hwnd, SW_SHOW);
+    UpdateWindow(hwnd);
+
+	return false;
 }

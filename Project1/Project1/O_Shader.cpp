@@ -16,49 +16,36 @@ O_Shader::~O_Shader()
 
 bool O_Shader::Create()
 {
-	if (Vertex()) return true;
-
-	if (Pixel())return true;
-
-	return false;
-}
-
-//頂点シェーダーのコンパイル
-bool O_Shader::Vertex()
-{
+	ID3DBlob* error{};
 	HRESULT hr = D3DCompileFromFile
 	(
-		L"VertexShader.hlsl",
+		L"shader.hlsl",
 		nullptr, nullptr,
 		"vs", "vs_5_0",
 		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
-		0, &vShader, nullptr
+		0, &vShader, &error
 	);
-
 	if (FAILED(hr))
 	{
+		char* p = static_cast<char*>(error->GetBufferPointer());
 		assert(false && "頂点シェーダーのコンパイルに失敗");
-		return true;
 	}
-	return false;
-}
 
-//ピクセルシェーダーのコンパイル
-bool O_Shader::Pixel()
-{
-	HRESULT hr = D3DCompileFromFile
+	hr = D3DCompileFromFile
 	(
-		L"PixelShader.hlsl",
+		L"shader.hlsl",
 		nullptr, nullptr,
 		"ps", "ps_5_0",
 		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
-		0, &pShader, nullptr
+		0, &pShader, &error
 	);
-
 	if (FAILED(hr))
 	{
+		char* p = static_cast<char*>(error->GetBufferPointer());
 		assert(false && "ピクセルシェーダーのコンパイルに失敗");
-		return true;
 	}
+
+	if (error)error->Release();
+
 	return false;
 }
